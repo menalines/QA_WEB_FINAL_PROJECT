@@ -29,12 +29,13 @@ public class BrowserFixture {
     public void beforeTest() {
         Configuration.baseUrl = userPageUrl;
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setAcceptInsecureCerts(false);
-        capabilities.setCapability("enableVNC", true);
-
-        Configuration.browserCapabilities = capabilities;
         Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1920x1080";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+        Configuration.browserCapabilities = capabilities;
 
         open(userPageUrl);
     }
