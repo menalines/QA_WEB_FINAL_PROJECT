@@ -31,11 +31,9 @@ public class BrowserFixture {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setAcceptInsecureCerts(false);
-        capabilities.setCapability("enableVNC", false);
-        capabilities.setCapability("enableVideo", false);
+        capabilities.setCapability("enableVNC", true);
 
         Configuration.browserCapabilities = capabilities;
-//        Configuration.remote = "http://localhost:4444/wd/hub";
 
         open(userPageUrl);
     }
