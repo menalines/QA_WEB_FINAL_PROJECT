@@ -34,6 +34,7 @@ public class BrowserFixture {
         capabilities.setCapability("enableVNC", true);
 
         Configuration.browserCapabilities = capabilities;
+        Configuration.remote = "http://localhost:4444/wd/hub";
 
         open(userPageUrl);
     }
