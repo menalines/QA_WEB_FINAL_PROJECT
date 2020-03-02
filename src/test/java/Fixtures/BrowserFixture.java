@@ -32,22 +32,15 @@ public class BrowserFixture {
 
     @BeforeEach
     public void beforeTest() {
-//        Configuration.baseUrl = userPageUrl;
-//
-//        Configuration.remote = "http://localhost:4444/wd/hub";
-//        Configuration.browser = "chrome";
-//        Configuration.browserSize = "1920x1080";
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        Configuration.browserCapabilities = capabilities;
-
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
-        try {
-            WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
+        Configuration.baseUrl = userPageUrl;
+        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1920x1080";
+        Configuration.browserCapabilities = capabilities;
 
         open(userPageUrl);
     }
