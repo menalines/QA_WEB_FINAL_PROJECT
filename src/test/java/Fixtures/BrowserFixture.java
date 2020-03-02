@@ -10,7 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.clearBrowserCookies;
 import static com.codeborne.selenide.Selenide.open;
@@ -27,15 +32,22 @@ public class BrowserFixture {
 
     @BeforeEach
     public void beforeTest() {
-        Configuration.baseUrl = userPageUrl;
+//        Configuration.baseUrl = userPageUrl;
+//
+//        Configuration.remote = "http://localhost:4444/wd/hub";
+//        Configuration.browser = "chrome";
+//        Configuration.browserSize = "1920x1080";
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        Configuration.browserCapabilities = capabilities;
 
-        Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
-        Configuration.browserCapabilities = capabilities;
+        try {
+            WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         open(userPageUrl);
     }
