@@ -5,7 +5,6 @@ import PageObjects.CartPage;
 import PageObjects.HeadPage;
 import PageObjects.UserPage;
 import com.codeborne.selenide.Configuration;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,13 +30,11 @@ public class BrowserFixture {
         Configuration.baseUrl = userPageUrl;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
         capabilities.setAcceptInsecureCerts(false);
-
-        WebDriverManager.chromedriver().setup();
+        capabilities.setCapability("enableVNC", true);
 
         Configuration.browserCapabilities = capabilities;
+        Configuration.remote = "http://localhost:4444/wd/hub";
 
         open(userPageUrl);
     }
