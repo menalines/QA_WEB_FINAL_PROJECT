@@ -46,15 +46,16 @@ public class BrowserFixture {
         options.setCapability("enableVideo", true);
         RemoteWebDriver webDriver = null;
         try {
-            webDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+            webDriver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), options);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
         Configuration.baseUrl = "http://automationpractice.com";
-        setWebDriver(webDriver);
-
         sleep(10000);
+        setWebDriver(webDriver);
+        sleep(10000);
+
 
         Selenide.open("/");
     }
