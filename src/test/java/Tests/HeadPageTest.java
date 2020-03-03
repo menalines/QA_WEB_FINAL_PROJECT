@@ -1,7 +1,6 @@
 package Tests;
 
 import Fixtures.BrowserFixture;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -10,7 +9,7 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 public class HeadPageTest extends BrowserFixture {
 
     @Test

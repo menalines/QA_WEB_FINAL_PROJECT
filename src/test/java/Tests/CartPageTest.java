@@ -8,7 +8,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 public class CartPageTest extends BrowserFixture {
     @Test
     public void addProductInCartTest() {

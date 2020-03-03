@@ -7,7 +7,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 public class ResearchPageTest extends BrowserFixture {
     @Test
     public void searchForAvailableProducts() {
