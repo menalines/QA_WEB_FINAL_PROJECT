@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.clearBrowserCookies;
+import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 @ExtendWith(Listener.class)
@@ -52,6 +53,9 @@ public class BrowserFixture {
 
         Configuration.baseUrl = "http://automationpractice.com";
         setWebDriver(webDriver);
+
+        sleep(10000);
+
         Selenide.open("/");
     }
 
