@@ -11,9 +11,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.clearBrowserCookies;
+import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 @ExtendWith(Listener.class)
 @Execution(ExecutionMode.SAME_THREAD)
@@ -27,15 +33,25 @@ public class BrowserFixture {
 
     @BeforeAll
     public static void beforeTest() {
-        Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.browser = "chrome";
+//        Configuration.remote = "http://localhost:4444/wd/hub";
+//        Configuration.browser = "chrome";
         Configuration.browserSize = "1980x1080";
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-        Configuration.browserCapabilities = capabilities;
-        Configuration.baseUrl = "http://automationpractice.com";
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("enableVNC", true);
+//        capabilities.setCapability("enableVideo", true);
+//        Configuration.browserCapabilities = capabilities;
+        ChromeOptions options = new ChromeOptions();
+        options.setCapability("enableVNC", true);
+        options.setCapability("enableVideo", true);
+        RemoteWebDriver webDriver = null;
+        try {
+            webDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
+        Configuration.baseUrl = "http://automationpractice.com";
+        setWebDriver(webDriver);
         Selenide.open("/");
     }
 
