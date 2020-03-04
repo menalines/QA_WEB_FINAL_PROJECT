@@ -16,6 +16,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.clearBrowserCookies;
@@ -41,21 +42,43 @@ public class BrowserFixture {
 //        capabilities.setCapability("enableVNC", true);
 //        capabilities.setCapability("enableVideo", true);
 //        Configuration.browserCapabilities = capabilities;
-        ChromeOptions options = new ChromeOptions();
-        options.setCapability("enableVNC", true);
-        options.setCapability("enableVideo", true);
-        RemoteWebDriver webDriver = null;
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+        capabilities.setVersion("80.0");
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+
         try {
-            webDriver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), options);
+            RemoteWebDriver driver = new RemoteWebDriver(
+                    URI.create("http://selenoid:4444/wd/hub").toURL(),
+                    capabilities
+            );
+
+            Configuration.baseUrl = "http://automationpractice.com";
+            sleep(10000);
+            setWebDriver(driver);
+            sleep(10000);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        Configuration.baseUrl = "http://automationpractice.com";
-        sleep(10000);
-        setWebDriver(webDriver);
-        sleep(10000);
-
+//        ChromeOptions options = new ChromeOptions();
+//        options.setCapability("enableVNC", true);
+//        options.setCapability("enableVideo", true);
+//
+//        RemoteWebDriver webDriver = null;
+//
+//        try {
+//            webDriver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), options);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Configuration.baseUrl = "http://automationpractice.com";
+//        sleep(10000);
+//        setWebDriver(webDriver);
+//        sleep(10000);
 
         Selenide.open("/");
     }
