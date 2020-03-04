@@ -43,11 +43,6 @@ public class BrowserFixture {
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
 
-        capabilities.setAcceptInsecureCerts(false);
-        capabilities.setCapability("enableVideo", false);
-        capabilities.setCapability("enableVNC", false);
-        Configuration.browserCapabilities = capabilities;
-
         open(userPageUrl);
 
 //        DesiredCapabilities capabilities = new DesiredCapabilities();
