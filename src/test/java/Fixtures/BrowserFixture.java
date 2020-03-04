@@ -36,12 +36,14 @@ public class BrowserFixture {
     @BeforeEach
     public void beforeTest() {
         Configuration.baseUrl = userPageUrl;
-        Configuration.remote = "http://127.0.0.1:4445/wd/hub";
-
+//        Configuration.browser = "chrome";
+        Configuration.headless = true;
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
+        capabilities.setAcceptInsecureCerts(false);
+        capabilities.setCapability("enableVideo", false);
+        capabilities.setCapability("enableVNC", false);
         Configuration.browserCapabilities = capabilities;
+        Configuration.remote = "http://localhost:4445/wd/hub/";
 
         open(userPageUrl);
 
