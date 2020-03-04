@@ -36,8 +36,6 @@ public class BrowserFixture {
     @BeforeEach
     public void beforeTest() {
         Configuration.baseUrl = userPageUrl;
-        Configuration.headless = true;
-
         Configuration.remote = "http://localhost:4444/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
