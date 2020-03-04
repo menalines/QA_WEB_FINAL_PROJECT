@@ -36,7 +36,7 @@ public class BrowserFixture {
     @BeforeEach
     public void beforeTest() {
         Configuration.baseUrl = userPageUrl;
-        Configuration.remote = "http://localhost:4445/wd/hub";
+        Configuration.remote = "http://127.0.0.1:4445/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
