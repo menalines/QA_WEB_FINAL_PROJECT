@@ -8,6 +8,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -19,8 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
-import static com.codeborne.selenide.Selenide.clearBrowserCookies;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 @ExtendWith(Listener.class)
@@ -28,40 +28,49 @@ import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 public class BrowserFixture {
     protected String correctEmail = "test@mail.ru";
     protected String correctPassword = "test";
-    static protected String userPageUrl = "http://automationpractice.com/index.php?controller=my-account";
+    protected String userPageUrl = "http://automationpractice.com/index.php?controller=my-account";
     protected HeadPage headPage = new HeadPage();
     protected UserPage userPage = new UserPage();
     protected CartPage cartPage = new CartPage();
 
-    @BeforeAll
-    public static void beforeTest() {
-//        Configuration.remote = "http://localhost:4444/wd/hub";
-//        Configuration.browser = "chrome";
-        Configuration.browserSize = "1980x1080";
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("enableVNC", true);
-//        capabilities.setCapability("enableVideo", true);
-//        Configuration.browserCapabilities = capabilities;
+    @BeforeEach
+    public void beforeTest() {
+        Configuration.baseUrl = userPageUrl;
+        Configuration.headless = true;
+
+        Configuration.remote = "http://localhost:4444/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setVersion("80.0");
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
+        Configuration.browserCapabilities = capabilities;
 
-        try {
-            RemoteWebDriver driver = new RemoteWebDriver(
-                    URI.create("http://selenoid:4444/wd/hub").toURL(),
-                    capabilities
-            );
+        capabilities.setAcceptInsecureCerts(false);
+        capabilities.setCapability("enableVideo", false);
+        capabilities.setCapability("enableVNC", false);
+        Configuration.browserCapabilities = capabilities;
 
-            Configuration.baseUrl = "http://automationpractice.com";
-            sleep(10000);
-            setWebDriver(driver);
-            sleep(10000);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        open(userPageUrl);
+
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setBrowserName("chrome");
+//        capabilities.setVersion("80.0");
+//        capabilities.setCapability("enableVNC", true);
+//        capabilities.setCapability("enableVideo", true);
+//
+//        try {
+//            RemoteWebDriver driver = new RemoteWebDriver(
+//                    URI.create("http://selenoid:4444/wd/hub").toURL(),
+//                    capabilities
+//            );
+//
+//            Configuration.baseUrl = "http://automationpractice.com";
+//            sleep(10000);
+//            setWebDriver(driver);
+//            sleep(10000);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
 
 //        ChromeOptions options = new ChromeOptions();
 //        options.setCapability("enableVNC", true);
@@ -80,7 +89,7 @@ public class BrowserFixture {
 //        setWebDriver(webDriver);
 //        sleep(10000);
 
-        Selenide.open("/");
+//        Selenide.open("/");
     }
 
     @AfterEach
