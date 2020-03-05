@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selenide.clearBrowserCookies;
 import static com.codeborne.selenide.Selenide.open;
 
 @ExtendWith(Listener.class)
-@Execution(ExecutionMode.SAME_THREAD)
+@Execution(ExecutionMode.CONCURRENT)
 public class BrowserFixture {
 
     public final static String CORRECT_EMAIL = "testDemo@mail.ru";
