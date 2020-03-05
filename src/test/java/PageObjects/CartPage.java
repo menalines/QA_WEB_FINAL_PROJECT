@@ -61,7 +61,7 @@ public class CartPage {
         return this;
     }
 
-    public String createOrderAndGetOrderName() {
+    public String getOrder() {
 
         HeadPage loginPage = new HeadPage();
 

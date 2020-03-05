@@ -15,7 +15,7 @@ public class HeadPage {
     private SelenideElement womenButton        = $(By.xpath("//a[text()='Women']"));
     private SelenideElement dressesButton      = $(By.xpath("//div/ul/li/a[text()='Dresses']"));
     private SelenideElement womenButtonMenu    = $(By.xpath("//a[text()='Women']/following-sibling::*"));
-    private SelenideElement dressesButtonMenu  = $(By.xpath("//div/ul/li/a[text() = 'Dresses']/following-sibling::*"));
+    private SelenideElement dressesButtonMenu  = $(By.xpath("//div/ul/li/a[text()='Dresses']/following-sibling::*"));
     private SelenideElement searchField        = $(By.id("search_query_top"));
     private SelenideElement searchButton       = $(By.name("submit_search"));
     private SelenideElement shoppingCartButton = $("div.shopping_cart>a");
@@ -26,44 +26,51 @@ public class HeadPage {
     SelenideElement userEmail                  = $(By.id("email"));
     SelenideElement userPassword               = $(By.id("passwd"));
     SelenideElement signInButton               = $(By.id("SubmitLogin"));
-    SelenideElement invalidPasswordAlert       = $(By.xpath("//li [text()='Invalid password.']"));
+    SelenideElement invalidPasswordAlert       = $(By.xpath("//li[text()='Invalid password.']"));
 
     public HeadPage goToLoginPage() {
+
         singInButton.click();
 
         return new HeadPage();
     }
 
     private void searchProduct(String query) {
+
         searchField.setValue(query);
         searchButton.click();
     }
 
     public boolean womenButtonMenuIsDisplayed() {
+
         womenButton.hover();
 
         return womenButtonMenu.isDisplayed();
     }
 
     public boolean dressesButtonMenuIsDisplayed() {
+
         dressesButton.hover();
 
         return dressesButtonMenu.isDisplayed();
     }
 
-    public boolean searchAndNotFoundProduct(String query) {
-        searchProduct(query);
-
-        return $(By.className("alert-warning")).should(exist).exists();
-    }
-
     public boolean searchAndFoundAnyProduct(String query) {
+
         searchProduct(query);
 
         return $("ul.product_list>li").should(exist).exists();
     }
 
+    public boolean searchAndNotFoundProduct(String query) {
+
+        searchProduct(query);
+
+        return $(By.className("alert-warning")).should(exist).exists();
+    }
+
     public boolean summerDressUrlSame() {
+
         womenButton.hover();
         $(By.xpath("//li[@class='sfHover']//a[contains(text(),'Summer Dresses')]")).click();
 
@@ -77,6 +84,7 @@ public class HeadPage {
     }
 
     public int addAllDressesToCart() {
+
         womenButton.click();
 
         $("div.block_content>ul.tree>li.last>a").click();
@@ -94,12 +102,14 @@ public class HeadPage {
     }
 
     public CartPage goToShoppingCartPage() {
+
         shoppingCartButton.click();
 
         return new CartPage();
     }
 
     public void addFirstProductInCartWithSetQuantity(String value) {
+
         firstProductInPage.click();
 
         $(By.xpath("//input[@id='quantity_wanted']")).should(exist).clear();
@@ -115,12 +125,14 @@ public class HeadPage {
     }
 
     public void loginWithCorrectData(String email, String password) {
+
         userEmail.setValue(email);
         userPassword.setValue(password);
         signInButton.click();
     }
 
     public boolean loginWithIncorrectData(String email, String password) {
+
         userEmail.setValue(email);
         userPassword.setValue(password);
         signInButton.click();

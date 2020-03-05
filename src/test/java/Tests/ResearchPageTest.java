@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ResearchPageTest extends BrowserFixture {
 
     @Test
-    public void searchForAvailableProducts() {
+    public void findProductsTest() {
         assertTrue(headPage.searchAndFoundAnyProduct("Dress"));
     }
 
     @Test
-    public void productNotFoundTest() {
+    public void notFoundProductsTest() {
         assertTrue(headPage.searchAndNotFoundProduct("Glasses"));
     }
 }

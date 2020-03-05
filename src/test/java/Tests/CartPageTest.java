@@ -13,10 +13,7 @@ public class CartPageTest extends BrowserFixture {
 
     @Test
     public void addProductInCartTest() {
-
-        int allAddedDresses = headPage.addAllDressesToCart();
-
-        assertEquals(allAddedDresses, headPage.goToShoppingCartPage().getNumberOfProductsInCart());
+        assertEquals(headPage.addAllDressesToCart(), headPage.goToShoppingCartPage().getNumberOfProductsInCart());
     }
 
     @Test
@@ -30,11 +27,10 @@ public class CartPageTest extends BrowserFixture {
     @Test
     public void correctAmountInCartTest() {
 
-        double allProdPrice, totalProduct;
-
         headPage.addAllDressesToCart();
-        allProdPrice = headPage.goToShoppingCartPage().getAllProductsPrice();
-        totalProduct = cartPage.getTotalProductsPrice();
+
+        double allProdPrice = headPage.goToShoppingCartPage().getAllProductsPrice();
+        double totalProduct = cartPage.getTotalProductsPrice();
 
         assertEquals(allProdPrice, totalProduct);
     }
@@ -42,12 +38,10 @@ public class CartPageTest extends BrowserFixture {
     @Test
     public void correctAmountInCartWithSetQuantityProductTest() {
 
-        double allProdPrice, totalProduct;
-
         headPage.addAllDressesToCart();
 
-        allProdPrice = headPage.goToShoppingCartPage().setProductQuantity("5").getAllProductsPrice();
-        totalProduct = cartPage.getTotalProductsPrice();
+        double allProdPrice = headPage.goToShoppingCartPage().setProductQuantity("5").getAllProductsPrice();
+        double totalProduct = cartPage.getTotalProductsPrice();
 
         assertEquals(allProdPrice, totalProduct);
     }
@@ -60,14 +54,15 @@ public class CartPageTest extends BrowserFixture {
 
         assertEquals(0, cartPage.getNumberOfProductsInCart());
     }
+
     @Test
     public void createAndCheckOrderTest() {
 
         headPage.addAllDressesToCart();
         headPage.goToShoppingCartPage();
 
-        String orderName = cartPage.createOrderAndGetOrderName();
+        String order = cartPage.getOrder();
 
-        assertTrue(userPage.orderIsPresent(orderName));
+        assertTrue(userPage.orderIsPresent(order));
     }
 }

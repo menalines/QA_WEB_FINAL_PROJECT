@@ -21,8 +21,7 @@ public class BrowserFixture {
 
     public final static String CORRECT_EMAIL = "testDemo@mail.ru";
     public final static String CORRECT_PASSWORD = "123456789";
-
-    protected String userPageUrl = "http://automationpractice.com/";
+    protected final static String PAGE_URL = "http://automationpractice.com/";
 
     protected HeadPage headPage = new HeadPage();
     protected UserPage userPage = new UserPage();
@@ -31,7 +30,7 @@ public class BrowserFixture {
     @BeforeEach
     public void beforeTest() {
 
-        Configuration.baseUrl = userPageUrl;
+        Configuration.baseUrl = PAGE_URL;
         Configuration.remote = "http://localhost:4444/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -40,7 +39,7 @@ public class BrowserFixture {
 
         Configuration.browserCapabilities = capabilities;
 
-        open(userPageUrl);
+        open(PAGE_URL);
     }
 
     @AfterEach
