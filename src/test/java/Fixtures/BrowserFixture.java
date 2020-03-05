@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import static com.codeborne.selenide.Selenide.clearBrowserCookies;
 import static com.codeborne.selenide.Selenide.open;
 
 @ExtendWith(Listener.class)
@@ -40,6 +41,6 @@ public class BrowserFixture {
 
     @AfterEach
     public void postConditions() {
-//        clearBrowserCookies();
+        clearBrowserCookies();
     }
 }
