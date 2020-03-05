@@ -83,6 +83,9 @@
                             <value>true</value>
                         </property>
                     </systemProperties>
+                    <parallel>all</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <threadCountMethods>4</threadCountMethods>
                 </configuration>
                 <dependencies>
                     <dependency>
