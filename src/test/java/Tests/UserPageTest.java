@@ -9,7 +9,7 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 public class UserPageTest extends BrowserFixture {
 
     private static final String USER_PAGE_URL = "http://automationpractice.com/index.php?controller=my-account";

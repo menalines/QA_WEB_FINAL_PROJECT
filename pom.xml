@@ -84,8 +84,8 @@
                         </property>
                     </systemProperties>
                     <parallel>all</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
-                    <threadCountMethods>4</threadCountMethods>
+                    <forkCount>4</forkCount>
+                    <threadCount>4</threadCount>
                 </configuration>
                 <dependencies>
                     <dependency>

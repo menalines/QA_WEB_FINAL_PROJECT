@@ -8,15 +8,11 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.codeborne.selenide.Selenide.clearBrowserCookies;
 import static com.codeborne.selenide.Selenide.open;
 
 @ExtendWith(Listener.class)
-@Execution(ExecutionMode.CONCURRENT)
 public class BrowserFixture {
 
     public final static String CORRECT_EMAIL = "testDemo@mail.ru";
@@ -43,7 +39,7 @@ public class BrowserFixture {
     }
 
     @AfterEach
-    public void postConditions(){
-        clearBrowserCookies();
+    public void postConditions() {
+//        clearBrowserCookies();
     }
 }
