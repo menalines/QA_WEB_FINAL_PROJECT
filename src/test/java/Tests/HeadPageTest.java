@@ -14,13 +14,21 @@ public class HeadPageTest extends BrowserFixture {
 
     @Test
     public void loginWithCorrectData() {
-        headPage.goToLoginPage().loginWithCorrectData(correctEmail, correctPassword);
-//        assertEquals(userPageUrl, url());
+
+        headPage.goToLoginPage().loginWithCorrectData(CORRECT_EMAIL, CORRECT_PASSWORD);
+        assertEquals(userPageUrl, url());
     }
+
     @Test
-    public void loginWithIncorrectData() {
-        assertTrue(headPage.goToLoginPage().loginWithIncorrectData(correctEmail,"1"));
+    public void loginWithIncorrectLogin() {
+        assertTrue(headPage.goToLoginPage().loginWithIncorrectData("incorrectData@gmail.com", CORRECT_PASSWORD));
     }
+
+    @Test
+    public void loginWithIncorrectPassword() {
+        assertTrue(headPage.goToLoginPage().loginWithIncorrectData(CORRECT_EMAIL,"incorrectData"));
+    }
+
     @Test
     public void womenButtonMenuIsDisplayedTest() {
         assertTrue(headPage.womenButtonMenuIsDisplayed());
