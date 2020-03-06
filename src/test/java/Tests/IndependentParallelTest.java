@@ -1,7 +1,9 @@
 package Tests;
 
 import Fixtures.BrowserFixture;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 
@@ -10,7 +12,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 @Execution(ExecutionMode.CONCURRENT)
-public class ParallelTest extends BrowserFixture {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class IndependentParallelTest extends BrowserFixture {
 
     @Test
     public void isContactUsEnabledTest() {

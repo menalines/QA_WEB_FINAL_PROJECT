@@ -1,7 +1,9 @@
 package Tests;
 
 import Fixtures.BrowserFixture;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 
@@ -9,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Execution(ExecutionMode.SAME_THREAD)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CartPageTest extends BrowserFixture {
 
     @Test
@@ -22,6 +25,17 @@ public class CartPageTest extends BrowserFixture {
         headPage.addFirstProductInCartWithSetQuantity("0");
 
         assertEquals(0, headPage.goToShoppingCartPage().getNumberOfProductsInCart());
+    }
+
+    @Test
+    public void createAndCheckOrderTest() {
+
+        headPage.addAllDressesToCart();
+        headPage.goToShoppingCartPage();
+
+        String order = cartPage.getOrder();
+
+        assertTrue(userPage.orderIsPresent(order));
     }
 
     @Test
@@ -53,16 +67,5 @@ public class CartPageTest extends BrowserFixture {
         cartPage = headPage.goToShoppingCartPage().deleteAllProducts();
 
         assertEquals(0, cartPage.getNumberOfProductsInCart());
-    }
-
-    @Test
-    public void createAndCheckOrderTest() {
-
-        headPage.addAllDressesToCart();
-        headPage.goToShoppingCartPage();
-
-        String order = cartPage.getOrder();
-
-        assertTrue(userPage.orderIsPresent(order));
     }
 }

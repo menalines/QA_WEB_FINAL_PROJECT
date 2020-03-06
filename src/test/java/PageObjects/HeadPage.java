@@ -69,6 +69,34 @@ public class HeadPage {
         return $(By.className("alert-warning")).should(exist).exists();
     }
 
+    public boolean casualDressUrlSame() {
+
+        womenButton.hover();
+        $(By.xpath("//li[@class='sfHover']//a[contains(text(),'Casual Dresses')]")).click();
+
+        String url1 = url();
+
+        womenButton.click();
+        $("div.block_content>ul.tree>li.last>a").click();
+        $(By.xpath("//div[@class='block_content']//ul//a[contains(text(),'Casual Dresses')]")).click();
+
+        return url1.equals(url());
+    }
+
+    public boolean eveningDressUrlSame() {
+
+        womenButton.hover();
+        $(By.xpath("//li[@class='sfHover']//a[contains(text(),'Evening Dresses')]")).click();
+
+        String url1 = url();
+
+        womenButton.click();
+        $("div.block_content>ul.tree>li.last>a").click();
+        $(By.xpath("//div[@class='block_content']//ul//a[contains(text(),'Evening Dresses')]")).click();
+
+        return url1.equals(url());
+    }
+
     public boolean summerDressUrlSame() {
 
         womenButton.hover();
