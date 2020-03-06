@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 
 import static Fixtures.BrowserFixture.CORRECT_EMAIL;
 import static Fixtures.BrowserFixture.CORRECT_PASSWORD;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -55,7 +56,7 @@ public class CartPage {
 
         for (SelenideElement element : allProducts) {
             element.click();
-            element.should(hidden);
+            element.shouldNotBe(exist);
         }
 
         return this;
