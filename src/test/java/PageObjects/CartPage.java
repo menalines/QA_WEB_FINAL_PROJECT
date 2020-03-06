@@ -39,7 +39,7 @@ public class CartPage {
     }
 
     public int getNumberOfProductsInCart() {
-        return $$("table.table>tbody>tr").size();
+        return $$("table.table>tbody>tr.cart_item").size();
     }
 
     public CartPage setProductQuantity(String value) {
